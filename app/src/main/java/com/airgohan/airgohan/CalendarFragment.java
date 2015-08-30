@@ -86,10 +86,6 @@ public class CalendarFragment extends Fragment {
                 for(int i = 0; i < values.length(); i++){
                     JSONObject value = values.getJSONObject(i);
                     mEvents.add(new Event(value));
-                    for(Event e: mEvents){
-                        Date date = e.getStartDate();
-                        //mCalendarView.
-                    }
                 }
             }catch(JSONException e){
                 Log.d("CalenderFragment", e.toString());
