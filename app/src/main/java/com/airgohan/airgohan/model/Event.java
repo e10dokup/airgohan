@@ -59,6 +59,7 @@ public class Event {
         mAddress = json.getJSONObject("address").getString("value");
         mGenre = json.getJSONObject("genre").getString("value");
         mMainMenu = json.getJSONObject("main_menu").getString("value");
+        mMaxMember = json.getJSONObject("max_member").getInt("value");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
         try{
             mStartDate = sdf.parse(json.getJSONObject("start").getString("value"));
@@ -182,5 +183,93 @@ public class Event {
         requestQueue.add(indexJson);
         requestQueue.start();
 
+    }
+
+    public void putEvents(final Context context, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        // Volley でリクエスト
+        String url = context.getString(R.string.str_api_event);
+
+        JSONObject json = new JSONObject();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+            json.put("app", "17");
+            json.put("id", mId);
+            JSONObject record = new JSONObject();
+            record.put("name", new JSONObject().put("value", mName));
+            record.put("host_id", new JSONObject().put("value", mHostId));
+            record.put("genre", new JSONObject().put("value", mGenre));
+            record.put("main_menu", new JSONObject().put("value", mMainMenu));
+            record.put("address", new JSONObject().put("value", mAddress));
+            record.put("start", new JSONObject().put("value", sdf.format(mStartDate)));
+            record.put("finish", new JSONObject().put("value", sdf.format(mFinishDate)));
+            record.put("max_member", new JSONObject().put("value", mMaxMember));
+            json.put("record", record);
+
+            Log.d(TAG, json.toString());
+
+            JsonObjectRequest putJson = new JsonObjectRequest(Request.Method.PUT, url, json, successListener, errorListener) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = super.getHeaders();
+                    // Add Http Header
+                    Map<String, String> newHeaders = new HashMap<String, String>();
+                    newHeaders.putAll(headers);
+                    newHeaders.put("X-Cybozu-API-Token", context.getString(R.string.str_key_events));
+                    newHeaders.put("Content-Type", "application/json");
+                    return newHeaders;
+                }
+            };
+
+            requestQueue.add(putJson);
+            requestQueue.start();
+        } catch (JSONException e){
+            Log.d(TAG, e.toString());
+
+        }
+    }
+
+    public void postEvents(final Context context, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        // Volley でリクエスト
+        String url = context.getString(R.string.str_api_event);
+
+        JSONObject json = new JSONObject();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+            json.put("app", "17");
+            json.put("id", mId);
+            JSONObject record = new JSONObject();
+            record.put("name", new JSONObject().put("value", mName));
+            record.put("host_id", new JSONObject().put("value", mHostId));
+            record.put("genre", new JSONObject().put("value", mGenre));
+            record.put("main_menu", new JSONObject().put("value", mMainMenu));
+            record.put("address", new JSONObject().put("value", mAddress));
+            record.put("start", new JSONObject().put("value", sdf.format(mStartDate)));
+            record.put("finish", new JSONObject().put("value", sdf.format(mFinishDate)));
+            record.put("max_member", new JSONObject().put("value", mMaxMember));
+            json.put("record", record);
+
+            Log.d(TAG, json.toString());
+
+            JsonObjectRequest putJson = new JsonObjectRequest(Request.Method.POST, url, json, successListener, errorListener) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = super.getHeaders();
+                    // Add Http Header
+                    Map<String, String> newHeaders = new HashMap<String, String>();
+                    newHeaders.putAll(headers);
+                    newHeaders.put("X-Cybozu-API-Token", context.getString(R.string.str_key_events));
+                    newHeaders.put("Content-Type", "application/json");
+                    return newHeaders;
+                }
+            };
+
+            requestQueue.add(putJson);
+            requestQueue.start();
+        } catch (JSONException e){
+            Log.d(TAG, e.toString());
+
+        }
     }
 }

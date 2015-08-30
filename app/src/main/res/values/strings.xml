@@ -4,10 +4,13 @@
     <string name="action_settings">Settings</string>
 
     <string name="str_api_events">https://1bdsb.cybozu.com/k/v1/records.json?app=17</string>
+    <string name="str_api_event">https://1bdsb.cybozu.com/k/v1/record.json</string>
     <string name="str_key_events">vaVTEdIif4BxzIHIMKfePlpZObZDrdvmkT1Puhh5</string>
     <string name="str_api_reserves">https://1bdsb.cybozu.com/k/v1/records.json?app=18</string>
+    <string name="str_api_reserve">https://1bdsb.cybozu.com/k/v1/record.json</string>
     <string name="str_key_reserves">wrrzunPNpjPgRt8tDiBKIZ72arx2TcCeyWwh6sun</string>
     <string name="str_api_users">https://1bdsb.cybozu.com/k/v1/records.json?app=19</string>
+    <string name="str_api_user">https://1bdsb.cybozu.com/k/v1/record.json</string>
     <string name="str_key_users">tSMQQiGBE9Rky08bOGkg8FkUeGgG6LUgICb0ByQx</string>
 
 <!-- TODO: Remove or change this placeholder text -->
