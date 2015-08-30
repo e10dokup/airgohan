@@ -121,7 +121,8 @@
                     android:textSize="34sp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:text="@string/yo_eat"/>
+                    android:text="@string/yo_eat"
+                    android:id="@+id/textView" />
 
             </RelativeLayout>
             <RelativeLayout
@@ -196,4 +197,14 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@mipmap/plus"
+        android:id="@+id/hostButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>
