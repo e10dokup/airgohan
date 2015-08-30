@@ -1,9 +1,9 @@
 package com.airgohan.airgohan;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,12 +15,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, new CalendarFragment())
-                    .commit();
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
@@ -39,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

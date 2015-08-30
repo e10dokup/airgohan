@@ -267,9 +267,30 @@ public class Event {
 
             requestQueue.add(putJson);
             requestQueue.start();
-        } catch (JSONException e){
+        } catch (JSONException e) {
             Log.d(TAG, e.toString());
 
         }
+    }
+
+    public void getIdEvents(final Context context, int id, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        // Volley でリクエスト
+        String url = context.getString(R.string.str_api_events) + "&レコード番号=" + String.valueOf(id);
+
+        JsonObjectRequest indexJson = new JsonObjectRequest(url, successListener, errorListener){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = super.getHeaders();
+                // Add Http Header
+                Map<String, String> newHeaders = new HashMap<String, String>();
+                newHeaders.putAll(headers);
+                newHeaders.put("X-Cybozu-API-Token", context.getString(R.string.str_key_events));
+                return newHeaders;
+            }
+        };
+
+        requestQueue.add(indexJson);
+
     }
 }

@@ -4,15 +4,16 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airgohan.airgohan.model.Event;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,80 +33,66 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ShareListFragment.OnFragmentInteractionListener} interface
+ * {@link SearchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ShareListFragment#newInstance} factory method to
+ * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShareListFragment extends Fragment implements AdapterView.OnItemClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
+public class HostInfoFragment extends Fragment {
 
+    TextView tvHostName;
+    ImageView ivHost;
     Event mEvent = new Event();
     List<Event> mEvents = new ArrayList<Event>();
+    Integer mHostId;
+    ListView lvHostInfo;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
 
-    private ListView mListView;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShareListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShareListFragment newInstance(String param1, String param2) {
-        ShareListFragment fragment = new ShareListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public ShareListFragment() {
-        // Required empty public constructor
+    public HostInfoFragment() {
+        //TODO:
+        mHostId = 1;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_host_info, container, false);
+
+        mEvent.getHostEvents(getActivity(), mHostId, mSuccessListener, mErrorListener);
+
+        tvHostName = (TextView)v.findViewById(R.id.textView_host_name);
+        ivHost = (ImageView)v.findViewById(R.id.imageView_host);
+        lvHostInfo = (ListView)v.findViewById(R.id.listView_hostinfo);
+        return v;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mListView = (ListView)getView().findViewById(R.id.listView);
-        mListView.setOnItemClickListener(this);
-
-        Event event = new Event();
-        mEvent.getEvents(getActivity().getApplicationContext(), mSuccessListener, mErrorListener);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
+    private void search(){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new ShareListFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     @Override
     public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
@@ -134,21 +122,33 @@ public class ShareListFragment extends Fragment implements AdapterView.OnItemCli
     private Response.Listener<JSONObject> mSuccessListener = new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
-            Log.d("CalenderFragment", response.toString());
+            Log.d("HostInfoFragment", response.toString());
             try{
                 JSONArray values = response.getJSONArray("records");
                 for(int i = 0; i < values.length(); i++){
                     JSONObject value = values.getJSONObject(i);
                     mEvents.add(new Event(value));
+                    ArrayList<String> hostInfos = new ArrayList<String>();
+                    for(Event e: mEvents){
+                        if (mHostId == e.getHostId()) {
+                            String name = e.getName();
+                            Date startDate = e.getStartDate();
+                            String genre = e.getGenre();
+                            Log.d("HostInfoFragment", "name:" + name);
+                            Log.d("HostInfoFragment", "startDate:" + sdf.format(startDate));
+                            Log.d("HostInfoFragment", "genre:" + genre);
+                            tvHostName.setText(name + " さん");
+                            String hostInfo = sdf.format(startDate) + "    " + genre;
+                            hostInfos.add(hostInfo);
+                        }
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_expandable_list_item_1, hostInfos);
+                    lvHostInfo.setAdapter(adapter);
                 }
-
-
-                ShareListAdapter adapter = new ShareListAdapter(getActivity().getApplicationContext(), R.layout.adapter_sharelist, mEvents);
-                mListView.setAdapter(adapter);
-
             }catch(JSONException e){
-                Log.d("CalenderFragment", e.toString());
-                Toast.makeText(getActivity(), "何か問題があるよ", Toast.LENGTH_LONG).show();
+                Log.d("HostInfoFragment", e.toString());
+                Toast.makeText(getActivity(), "何か問題があるよ2", Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -156,17 +156,8 @@ public class ShareListFragment extends Fragment implements AdapterView.OnItemCli
     private Response.ErrorListener mErrorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
+            Log.d("HostInfoFragment", error.toString());
+            Toast.makeText(getActivity(), "何か問題があるよ1", Toast.LENGTH_LONG).show();
         }
     };
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Event event = (Event)adapterView.getAdapter().getItem(i);
-
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment, ShareFragment.newInstance(event.getId()));
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-    }
 }

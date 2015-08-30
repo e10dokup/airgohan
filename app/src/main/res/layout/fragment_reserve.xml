@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment"
+    android:background="@android:color/white"
+    tools:context="com.airgohan.airgohan.ReserveFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeText"
+            android:inputType="datetime"
+            android:layout_marginTop="15dp"
+            android:hint="@string/reserve_time"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/targetText"
+            android:inputType="number"
+            android:layout_marginTop="15dp"
+            android:hint="@string/reserve_target"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/reserveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:text="@string/reserve_button"
+            android:background="@color/theme_color"/>
+    </LinearLayout>
+
+</FrameLayout>

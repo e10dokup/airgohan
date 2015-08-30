@@ -1,6 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.airgohan.airgohan.ShareFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment"
+    android:background="@android:color/white"
+    tools:context="com.airgohan.airgohan.ShareFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,24 +17,128 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="100dp"
             android:gravity="center">
-
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/foodImage"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
                 android:src="@mipmap/yo_eat"/>
 
             <com.airgohan.airgohan.ClipImageView
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@mipmap/sample_host"
-                android:layout_above="@+id/hostText"
+                android:layout_above="@+id/hostImage"
                 android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:text="xxxxxxさん"
+                android:textStyle="bold"
+                android:id="@+id/hostText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="xxxxxx"
+                android:textStyle="bold"
+                android:id="@+id/addressText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="xxxxxx"
+                android:textStyle="bold"
+                android:id="@+id/timeText" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:padding="15dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="15dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/food_genre" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        android:text="New Text"
+                        android:id="@+id/genreText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/food_main" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        android:text="New Text"
+                        android:id="@+id/mainText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/food_comment" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        android:text="New Text"
+                        android:id="@+id/commentText" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <Button
+        android:id="@+id/reserveButton"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,4 +150,5 @@
         android:background="@color/theme_color"
         android:textColor="@android:color/white"
         android:text="@string/reserve_button"/>
+
 </FrameLayout>
