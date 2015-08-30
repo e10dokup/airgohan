@@ -122,6 +122,7 @@ public class ShareFragment extends Fragment implements View.OnClickListener {
         TextView commentText =  (TextView)getView().findViewById(R.id.commentText);
         commentText.setText("");
 
+        this.getView().findViewById(R.id.hostImage).setOnClickListener(this);
 
         TextView timeText =  (TextView)getView().findViewById(R.id.timeText);
         timeText.setText(String.format("%d年%d月%d日 %d時%d分 〜 %d年%d月%d日 %d時%d分",
@@ -178,11 +179,23 @@ public class ShareFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.reserveButton) {
+        switch(view.getId()){
+            case R.id.reserveButton:
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.add(R.id.fragment, ReserveFragment.newInstance(mTargetEvent.getId()));
             transaction.addToBackStack(null);
             transaction.commit();
+            break;
+            case R.id.hostImage:
+            showHostInfo();
+            break;
         }
+    }
+
+    private void showHostInfo(){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new HostInfoFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

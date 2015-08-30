@@ -78,6 +78,7 @@ public class CalendarFragment extends Fragment {
                 }catch(ParseException e){
                     e.printStackTrace();
                 }
+                /*
                 if(selectedDate.equals(eventTrntDate)){
                     Utils.selectedEvent = event;
                     FragmentManager manager = getFragmentManager();
@@ -87,6 +88,7 @@ public class CalendarFragment extends Fragment {
                     transaction.commit();
                     break;
                 }
+                */
             }
         }
     };

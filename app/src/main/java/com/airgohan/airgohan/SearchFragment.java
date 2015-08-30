@@ -58,10 +58,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.searchButton){
-            search();
+        switch (view.getId()){
+            case R.id.searchButton:
+                search();
+                break;
         }
     }
+
 
     private void search(){
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
