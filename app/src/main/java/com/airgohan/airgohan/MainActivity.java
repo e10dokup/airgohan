@@ -1,6 +1,7 @@
 package com.airgohan.airgohan;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +21,6 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.content_frame, new CalendarFragment())
                     .commit();
         }
-
-
-    }
-
-    @Override
-    public void onBackPressed() {
-
-
-        super.onBackPressed();
     }
 
     @Override

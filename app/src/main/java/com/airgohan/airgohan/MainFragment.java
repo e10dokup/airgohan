@@ -2,19 +2,14 @@ package com.airgohan.airgohan;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
@@ -93,7 +88,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         transaction.addToBackStack(null);
         transaction.commit();
         */
-        EditText text = (EditText)getView().findViewById(R.id.editText);
+        EditText text = (EditText)getView().findViewById(R.id.edit_name);
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.fragment, new SearchFragment());
