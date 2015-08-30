@@ -20,7 +20,7 @@ import android.view.ViewGroup;
  * Use the {@link ReserveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReserveFragment extends Fragment {
+public class ReserveFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_SHARE_ID = "age_share_id";
@@ -64,6 +64,13 @@ public class ReserveFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        this.getView().findViewById(R.id.reserveButton).setOnClickListener(this);
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
@@ -95,6 +102,16 @@ public class ReserveFragment extends Fragment {
                 } else {
                     return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_out);
                 }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.reserveButton) {
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.add(R.id.fragment, new MailSendFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 }

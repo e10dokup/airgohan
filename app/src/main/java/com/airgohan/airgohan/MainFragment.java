@@ -34,6 +34,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         this.getView().findViewById(R.id.waImage).setOnClickListener(this);
         this.getView().findViewById(R.id.yoImage).setOnClickListener(this);
         this.getView().findViewById(R.id.searchButton).setOnClickListener(this);
+        this.getView().findViewById(R.id.hostButton).setOnClickListener(this);
 
     }
     /*
@@ -68,12 +69,26 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             case R.id.searchButton:
                 search();
                 break;
+            case R.id.hostButton:
+                hostSetting();
+                break;
             default:
                 return;
         }
     }
 
+    private void hostSetting(){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new CalendarFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     private void searchKeyword(){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new CalendarFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
 
@@ -98,7 +113,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private void searchGenre(int id){
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.fragment, new SearchFragment());
+        transaction.add(R.id.fragment, new ShareListFragment());
         transaction.addToBackStack(null);
         transaction.commit();
 
