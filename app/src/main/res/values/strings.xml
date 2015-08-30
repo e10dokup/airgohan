@@ -5,4 +5,26 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hint">どちらでお食事ですか？</string>
+    <string name="main_title">いただきます</string>
+    <string name="main_subtitle">190カ国超の地元の家で、楽しい食事をしょう</string>
+    <string name="search_title">ご飯を探索</string>
+    <string name="search_subtitle">みんなどんなご飯を食べてるの？見てみよう。</string>
+
+    <string name="wa_eat">和食</string>
+    <string name="yo_eat">洋食</string>
+    <string name="chu_eat">中華</string>
+    <string name="fre_eat">フレンチ</string>
+
+    <string name="search_where">どこで食事？</string>
+    <string name="search_time">食事時間</string>
+    <string name="search_eat">食べたいもの</string>
+    <string name="search_target">対象人数</string>
+    <string name="search_button">探してみる</string>
+    <string name="search_genre">どのジャンル？</string>
+    <string name="search_titile">検索</string>
+
+    <string name="reserve_titile">検索結果</string>
+    <string name="reserve_button">予約をリクエスト</string>
 </resources>

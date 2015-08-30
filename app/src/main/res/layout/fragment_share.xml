@@ -2,8 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.airgohan.airgohan.ShareFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center" >
 
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/foodImage"
+                android:src="@mipmap/yo_eat"/>
+
+            <com.airgohan.airgohan.ClipImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@mipmap/sample_host"
+                android:layout_above="@+id/hostText"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@color/theme_color"
+        android:textColor="@android:color/white"
+        android:text="@string/reserve_button"/>
 </FrameLayout>

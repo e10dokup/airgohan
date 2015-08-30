@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.airgohan.airgohan.ReserveFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodImage"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/yo_eat"/>
+        <com.airgohan.airgohan.ClipImageView
+            android:id="@+id/hostImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@mipmap/sample_host"
+            android:layout_above="@+id/hostText"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="xxxxxxxxxxx"
+            android:id="@+id/hostText"
+            android:layout_below="@+id/hostImage"
+            android:layout_alignParentStart="true" />
+
+</RelativeLayout>
