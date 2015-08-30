@@ -87,6 +87,17 @@ public class HostEventFragment extends Fragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+        }else{
+            try {
+                Event newEvent = new Event(0, 1,
+                        mNameEdit.getText().toString(), mAddressEdit.getText().toString(),
+                        mGenreEdit.getText().toString(), mMainMenuEdit.getText().toString(),
+                        sdf.parse(mStartTimeEdit.getText().toString()), sdf.parse(mFinishTimeEdit.getText().toString()),
+                        Integer.parseInt(mMaxMembersEdit.getText().toString()));
+                newEvent.postEvents(getActivity(), mPutSuccessListener, mErrorListener);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 

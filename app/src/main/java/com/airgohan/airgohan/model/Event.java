@@ -238,7 +238,6 @@ public class Event {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
             json.put("app", "17");
-            json.put("id", mId);
             JSONObject record = new JSONObject();
             record.put("name", new JSONObject().put("value", mName));
             record.put("host_id", new JSONObject().put("value", mHostId));

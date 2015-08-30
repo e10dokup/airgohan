@@ -82,11 +82,17 @@ public class CalendarFragment extends Fragment {
                     Utils.selectedEvent = event;
                     FragmentManager manager = getFragmentManager();
                     FragmentTransaction transaction  = manager.beginTransaction();
-                    transaction.replace(R.id.content_frame, new HostEventFragment());
+                    transaction.replace(R.id.fragment, new HostEventFragment());
                     transaction.addToBackStack(null);
                     transaction.commit();
                     break;
                 }
+                Utils.selectedEvent = null;
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction  = manager.beginTransaction();
+                transaction.replace(R.id.fragment, new HostEventFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         }
     };
