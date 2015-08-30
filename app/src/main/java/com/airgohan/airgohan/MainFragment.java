@@ -1,98 +1,139 @@
 package com.airgohan.airgohan;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
+public class MainFragment extends Fragment implements View.OnClickListener {
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MainFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-    // TODO: Rename and change types of parameters
-    private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public MainFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        this.getView().findViewById(R.id.freImage).setOnClickListener(this);
+        this.getView().findViewById(R.id.chuImage).setOnClickListener(this);
+        this.getView().findViewById(R.id.waImage).setOnClickListener(this);
+        this.getView().findViewById(R.id.yoImage).setOnClickListener(this);
+        this.getView().findViewById(R.id.searchButton).setOnClickListener(this);
+
+    }
+    /*
+     @Override
+     public void onAttach(Activity activity) {
+
+     }
+
+     @Override
+     public void onDetach() {
+         super.onDetach();
+
+     }
+ */
+    @Override
+    public void onClick(View view) {
+
+        int id=3;
+        switch(view.getId()){
+            case R.id.freImage:
+                searchGenre(3);
+                break;
+            case R.id.chuImage:
+                searchGenre(2);
+                break;
+            case R.id.waImage:
+                searchGenre(1);
+                break;
+            case R.id.yoImage:
+                searchGenre(4);
+                break;
+            case R.id.searchButton:
+                search();
+                break;
+            default:
+                return;
         }
+
+
+
+    }
+
+    private void searchKeyword(){
+
+    }
+
+    private void search(){
+        /*
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment, new SearchFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+        */
+        EditText text = (EditText)getView().findViewById(R.id.editText);
+
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new SearchFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
+
+    private void searchGenre(int id){
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        //transaction.replace(R.id., NextFragment.newInstance());
+        transaction.commit();
+
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
+        switch (transit) {
+            case FragmentTransaction.TRANSIT_FRAGMENT_FADE:
+                if (enter) {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_in);
+                } else {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_out);
+                }
+            case FragmentTransaction.TRANSIT_FRAGMENT_CLOSE:
+                if (enter) {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_in);
+                } else {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_out);
+                }
+            case FragmentTransaction.TRANSIT_FRAGMENT_OPEN:
+            default:
+                if (enter) {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_in);
+                } else {
+                    return AnimatorInflater.loadAnimator(getActivity(), android.R.animator.fade_out);
+                }
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
     }
 
 }
