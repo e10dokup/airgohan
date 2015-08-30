@@ -165,7 +165,7 @@ public class Event {
     public void getHostEvents(final Context context, int userId, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener){
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         // Volley でリクエスト
-        String url = context.getString(R.string.str_api_events) + "&host_id=" + String.valueOf(userId);
+        String url = context.getString(R.string.str_api_events) + "&query=host_id=" + String.valueOf(userId);
 
         JsonObjectRequest indexJson = new JsonObjectRequest(url, successListener, errorListener){
             @Override
