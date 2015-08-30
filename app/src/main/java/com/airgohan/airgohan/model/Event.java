@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -49,7 +50,14 @@ public class Event {
         mMaxMember = maxMember;
     }
 
-    
+    public Event(JSONObject json) throws JSONException{
+        mId = json.getJSONObject("レコード番号").getInt("value");
+        mHostId = json.getJSONObject("host_id").getInt("value");
+        mName = json.getJSONObject("name").getString("value");
+        mAddress = json.getJSONObject("address").getString("value");
+        mGenre = json.getJSONObject("genre").getString("value");
+        mMainMenu = json.getJSONObject("main_menu").getString("value");
+    }
 
     public int getId() {
         return mId;
