@@ -76,9 +76,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             default:
                 return;
         }
-
-
-
     }
 
     private void searchKeyword(){
@@ -106,7 +103,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private void searchGenre(int id){
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        //transaction.replace(R.id., NextFragment.newInstance());
+        transaction.add(R.id.fragment, new SearchFragment());
+        transaction.addToBackStack(null);
         transaction.commit();
 
     }

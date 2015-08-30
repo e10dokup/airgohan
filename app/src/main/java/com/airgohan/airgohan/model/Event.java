@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +59,13 @@ public class Event {
         mAddress = json.getJSONObject("address").getString("value");
         mGenre = json.getJSONObject("genre").getString("value");
         mMainMenu = json.getJSONObject("main_menu").getString("value");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+        try{
+            mStartDate = sdf.parse(json.getJSONObject("start").getString("value"));
+            mFinishDate = sdf.parse(json.getJSONObject("finish").getString("value"));
+        }catch(ParseException e){
+            Log.d("Event", e.toString());
+        }
     }
 
     public int getId() {
@@ -157,6 +166,29 @@ public class Event {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         // Volley でリクエスト
         String url = context.getString(R.string.str_api_events) + "&host_id=" + String.valueOf(userId);
+
+        JsonObjectRequest indexJson = new JsonObjectRequest(url, successListener, errorListener){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = super.getHeaders();
+                // Add Http Header
+                Map<String, String> newHeaders = new HashMap<String, String>();
+                newHeaders.putAll(headers);
+                newHeaders.put("X-Cybozu-API-Token", context.getString(R.string.str_key_events));
+                return newHeaders;
+            }
+        };
+
+        requestQueue.add(indexJson);
+        requestQueue.start();
+
+    }
+
+
+    public void getIdEvents(final Context context, int id, Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        // Volley でリクエスト
+        String url = context.getString(R.string.str_api_events) + "&レコード番号=" + String.valueOf(id);
 
         JsonObjectRequest indexJson = new JsonObjectRequest(url, successListener, errorListener){
             @Override

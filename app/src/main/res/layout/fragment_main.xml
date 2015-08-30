@@ -69,6 +69,7 @@
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="2dp"
                             android:src="@mipmap/ic_search_black_48dp"
                             android:background="@color/theme_color"
                             android:id="@+id/searchButton" />
@@ -133,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:scaleType="fitStart"
                     android:adjustViewBounds="true"
-                    android:src="@mipmap/yo_eat" />
+                    android:src="@mipmap/wa_eat" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:scaleType="fitStart"
                     android:adjustViewBounds="true"
-                    android:src="@mipmap/yo_eat" />
+                    android:src="@mipmap/chu_eat" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

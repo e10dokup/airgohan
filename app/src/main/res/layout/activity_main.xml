@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.airgohan.airgohan.CalendarFragment"
+        android:name="com.airgohan.airgohan.MainFragment"
         tools:layout="@layout/fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
