@@ -38,4 +38,14 @@
     <string name="food_genre">ジャンル</string>
     <string name="food_main">メイン料理</string>
     <string name="food_comment">コメント</string>
+
+    <string name="create_name">名前は？</string>
+    <string name="create_address">どこで食べる？</string>
+    <string name="create_genre">どのジャンル？</string>
+    <string name="create_main_menu">メインメニューは？</string>
+    <string name="create_max_members">対象人数は？</string>
+    <string name="create_start_time">開始時刻は？</string>
+    <string name="create_finish_time">終了時刻は？</string>
+    <string name="btn_create">この予定をたてる</string>
+
 </resources>
