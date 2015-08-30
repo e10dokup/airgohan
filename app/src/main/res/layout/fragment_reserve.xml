@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment"
     android:background="@android:color/white"
+
     tools:context="com.airgohan.airgohan.ReserveFragment">
 
 
